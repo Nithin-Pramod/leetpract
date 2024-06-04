@@ -6,8 +6,6 @@ class Solution {
         int length = splittedString.length;
         if(length==1) return splittedString[0];
         for(int i = 0 ; i < splittedString.length ; i++){
-            
-            // tempString+=splittedString[splittedString.length-i-1];
             if(i==0){
                 tempString+=splittedString[length-1];
             }
