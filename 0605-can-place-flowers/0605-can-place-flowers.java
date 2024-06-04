@@ -3,6 +3,8 @@ class Solution {
         
         int count = 0;
         
+        if(n==0) return true;
+        
         for(int i = 0 ; i < flowerbed.length ; i++){
             
             if(flowerbed[i] == 0){
@@ -22,7 +24,7 @@ class Solution {
             
         }
         
-        return count>=n;
+        return false;
         
     }
 }
