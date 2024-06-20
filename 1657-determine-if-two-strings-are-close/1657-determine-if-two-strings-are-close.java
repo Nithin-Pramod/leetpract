@@ -1,37 +1,46 @@
 import java.util.Collection;
 class Solution {
     public boolean closeStrings(String word1, String word2) {
-        
-        if(word1.length()!=word2.length()) return false;
-        
-        char[] ar1 = word1.toCharArray();
-        char[] ar2 = word2.toCharArray();
-        
-        Map<Character,Integer> map1 = new HashMap<>();
-        Map<Character,Integer> map2 = new HashMap<>();
-        for(char i : ar1){
-            if(map1.containsKey(i)) map1.put(i,map1.get(i)+1);
-            else map1.put(i,1);
-        }
-        for(char i : ar2){
-            if(map2.containsKey(i)) map2.put(i,map2.get(i)+1);
-            else map2.put(i,1);
-        }
-        
-        Set<Character> keySet1 = map1.keySet();
-        Set<Character> keySet2 = map2.keySet();
-        
-         if (!keySet1.equals(keySet2)) {
+        if (word1.length() != word2.length()) {
             return false;
         }
         
+        // Count character frequencies in both strings
+        int[] count1 = new int[26]; // to store frequency of characters for word1
+        int[] count2 = new int[26]; // to store frequency of characters for word2
         
-        Integer[] valuesArray1 = map1.values().toArray(new Integer[0]);
-        Integer[] valuesArray2 = map2.values().toArray(new Integer[0]);
-        Arrays.sort(valuesArray1);
-        Arrays.sort(valuesArray2);
+        for (char c : word1.toCharArray()) {
+            count1[c - 'a']++;
+        }
         
-        return Arrays.equals(valuesArray1, valuesArray2);
+        for (char c : word2.toCharArray()) {
+            count2[c - 'a']++;
+        }
         
+        // Compare character frequencies
+        Arrays.sort(count1);
+        Arrays.sort(count2);
+        
+        if (!Arrays.equals(count1, count2)) {
+            return false;
+        }
+        
+        // Compare character sets
+        boolean[] presentInWord1 = new boolean[26];
+        boolean[] presentInWord2 = new boolean[26];
+        
+        for (char c : word1.toCharArray()) {
+            presentInWord1[c - 'a'] = true;
+        }
+        
+        for (char c : word2.toCharArray()) {
+            presentInWord2[c - 'a'] = true;
+        }
+        
+        if (!Arrays.equals(presentInWord1, presentInWord2)) {
+            return false;
+        }
+        
+        return true;
     }
 }
