@@ -9,17 +9,22 @@
  * }
  */
 class Solution {
-    public ListNode reverseList(ListNode head) {
+    
+public ListNode reverseList(ListNode head) {
         
-        if(head==null || head.next==null) return head;
+        // Base case: if the list is empty or has only one node, return the head
+        if (head == null || head.next == null) return head;
         
+        // Recursively reverse the rest of the list starting from the second node
         ListNode newHead = reverseList(head.next);
-        head.next.next=head;
-        head.next=null;
         
+        // Set the next node's next pointer to the current node
+        head.next.next = head;
+        
+        // Set the current node's next pointer to null
+        head.next = null;
+        
+        // Return the new head of the reversed list
         return newHead;
-        
-        
-        
     }
 }
