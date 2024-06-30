@@ -12,19 +12,29 @@ class Solution {
     
 public ListNode reverseList(ListNode head) {
         
-        // Base case: if the list is empty or has only one node, return the head
+        // Base case: if the list is empty or has only one node, return the head as it is
         if (head == null || head.next == null) return head;
         
-        // Recursively reverse the rest of the list starting from the second node
-        ListNode newHead = reverseList(head.next);
+        // Initialize two pointers, previous (prev) and current (curr)
+        ListNode prev = null; // Initially, prev is set to null
+        ListNode curr = head; // curr is set to the head of the list
         
-        // Set the next node's next pointer to the current node
-        head.next.next = head;
+        // Iterate through the list until curr becomes null
+        while (curr != null) {
+            // Temporarily store the next node
+            ListNode nextTemp = curr.next;
+            
+            // Reverse the current node's pointer to point to the previous node
+            curr.next = prev;
+            
+            // Move the previous pointer one step forward to the current node
+            prev = curr;
+            
+            // Move the current pointer one step forward to the next node
+            curr = nextTemp;
+        }
         
-        // Set the current node's next pointer to null
-        head.next = null;
-        
-        // Return the new head of the reversed list
-        return newHead;
+        // At the end of the loop, prev will be pointing to the new head of the reversed list
+        return prev;
     }
 }
